@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Breadcrumb",
+  "description": "Awesome",
+  "version": "0.1",
+	
+  "background": {
+	"scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+	"tabs",
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
