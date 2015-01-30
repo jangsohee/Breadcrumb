@@ -1,0 +1,9 @@
+[submodule "Breadcrumb-extension"]
+	path = Breadcrumb-extension
+	url = https://github.com/jangsohee/Breadcrumb-extension.git
+[submodule "Breadcrumb-keyword"]
+	path = Breadcrumb-keyword
+	url = https://github.com/jangsohee/Breadcrumb-keyword.git
+[submodule "Breadcrumb-server"]
+	path = Breadcrumb-server
+	url = https://github.com/jangsohee/Breadcrumb-server.git
