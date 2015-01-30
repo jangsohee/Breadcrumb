@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
 	
 	string mecabOutputName = "../../../../keyword manager DB/2.mecab_output/" + thisTime + "output.txt";
 	string mecabAnalyzeName = "../../../../keyword manager DB/3.final/" + thisTime + "analyzeResult.txt";
+	string mecabTotalTFName = "../../../../keyword manager DB/4.total_TF_input/00total_TF_input.txt";
 	
 	MeCab::Tagger *tagger = MeCab::createTagger("-r C:/librarys/mecab-ko/mecabrc -d C:/librarys/mecab-ko/dic/mecab-ko-dic-1.6.1");
 	CHECK(tagger);
@@ -170,14 +171,14 @@ int main(int argc, char **argv) {
 
 		if ((ty == "NNG" || ty == "NNP" || ty == "NNB" || ty == "NNBC" || ty == "NR" || ty == "NP" || ty == "SL") && continuous == true)
 		{
-			cout << str << " " << ty << endl;
+			cout << str << '\t' << ty << endl;
 			msi[make_pair(str, ty)]++;
 			apstr.append(str + " ");
 			cnt++;
 		}
 		else if (ty == "NNG" || ty == "NNP" || ty == "NNB" || ty == "NNBC" || ty == "NR" || ty == "NP" || ty == "SL")
 		{
-			cout << str << " " << ty << endl;
+			cout << str << '\t' << ty << endl;
 			msi[make_pair(str, ty)]++;
 			continuous = true;
 			apstr.append(str + " ");
@@ -208,7 +209,7 @@ int main(int argc, char **argv) {
 						appendStr += (vs[k + j] + " ");
 					}
 					//cout << appendStr << endl;
-					msi[make_pair(appendStr, "compound")]++;
+					msi[make_pair(appendStr, "MyCompound")]++;
 				}
 			}
 			vs.clear();
@@ -230,8 +231,8 @@ int main(int argc, char **argv) {
 	map<pair<string, string>, int>::iterator it;
 	for (it = msi.begin(); it != msi.end(); ++it)
 	{
-		cout << (*it).first.first << " " << (*it).first.second
-			<< " " << (*it).second << endl;
+		cout << (*it).first.first << '\t' << (*it).first.second
+			<< '\t' << (*it).second << endl;
 		if (maxx < (*it).second)
 		{
 			maxx = (*it).second;
@@ -247,7 +248,15 @@ int main(int argc, char **argv) {
 
 	multimap<int, pair<string, string> >::iterator it2;
 	for (it2 = mis.begin(); it2 != mis.end(); ++it2)
-		cout << (*it2).second.first << " " << (*it2).first << endl;
+		cout << (*it2).second.first << '\t' << (*it2).first << endl;
+
+
+	fclose(stdin);
+	fclose(stdout);
+
+	freopen(mecabTotalTFName.c_str(), "w+", stdout);
+	for (it2 = mis.begin(); it2 != mis.end(); ++it2)
+		cout << (*it2).second.first << '\t' << (*it2).first << endl;
 
 
 	return 0;
